@@ -1,38 +1,396 @@
-.App {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --lightShadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
+  --darkShadow: 4px 10px 5px 0px rgba(0, 0, 0, 0.5);
+  --mainGrey: #ececec;
+  --darkGrey: #cfcfcf;
+
+  --mainTransition: all 0.3s linear;
+  --mainSpacing: 3px;
+  --primaryColor: #E58F65;
+}
+
+body {
+  padding-top: 77px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: 3em;
+  line-height: 1;
+  margin-bottom: 0.5em;
+}
+
+h2 {
+  font-size: 2em;
+  margin-bottom: 0.75em;
+}
+
+h3 {
+  font-size: 1.5em;
+  line-height: 1;
+  margin-bottom: 1em;
+}
+
+h4 {
+  font-size: 1.2em;
+  line-height: 1.25;
+  margin-bottom: 1.25em;
+}
+
+h5 {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 1.5em;
+}
+
+h6 {
+  font-size: 1em;
+  font-weight: bold;
+  margin-bottom: 1.5em;
+}
+
+.btn-primary {
+  display: inline-block;
+  text-decoration: none;
+  letter-spacing: var(--mainSpacing);
+  color: black;
+  background: var(--primaryColor);
+  padding: 0.4rem 0.9rem;
+  border: 3px solid var(--primaryColor);
+  transition: var(--mainTransition);
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: transparent;
+  color: var(--primaryColor);
+}
+
+
+/*========================
+NavBar 
+=========================*/
+
+.navbar {
+  background-color: whitesmoke;
+  left: 0;
+  padding: 0.75rem 2rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1;
+}
+
+.nav-btn {
+  background-color: transparent;
+  color: var(--primaryColor);
+  cursor: pointer;
+  border: none;
+  outline: none
+}
+
+.nav-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-header a {
+  color: var(--primaryColor);
+}
+
+.nav-links {
+  height: 0;
+  list-style-type: none;
+  overflow: hidden;
+  transition: var(--mainTransition);
+}
+
+.nav-links a {
+  color: black;
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: var(--mainSpacing);
+  padding: 1rem 0;
+  text-align: center;
+  text-decoration: none;
+  transition: var(--mainTransition);
+}
+
+.nav-links a:hover {
+  color: var(--primaryColor);
+}
+
+.show-nav {
+  height: 100px;
+}
+
+@media screen and (min-width: 768px) {
+  .nav-btn {
+    display: none;
+  }
+
+  .nav-center {
+    display: flex;
+    margin: 0 auto;
+    min-width: 1170px;
+  }
+
+  .nav-links {
+    display: flex;
+    height: auto;
+    margin-left: 4rem;
+  }
+
+  .nav-links a {
+    margin: 0 1rem;
+    padding: 0.5rem 0;
+  }
+
+}
+
+
+/*========================
+HeroImg
+=========================*/
+.defaultHero,
+.roomsHero {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background: url("./images/main-hero.jpg") center/cover no-repeat;
+  min-height: calc(100vh - 76px);
+}
+
+.roomsHero {
+  background-image: url("./images/rooms-hero.jpg");
+  min-height: 60vh;
+}
+
+
+/*========================
+Banner
+=========================*/
+.banner {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: inline-block;
+  letter-spacing: var(--mainSpacing);
+  padding: 2rem 1rem;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.banner div {
+  background-color: var(--primaryColor);
+  height: 5px;
+  width: 40%;
+  margin: 1.7rem auto;
+}
+
+.banner p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+@media screen and (min-width: 576px) {
+  .banner {
+    padding: 2rem 3rem;
+  }
+
+  .banner h1 {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .banner {
+    padding: 2rem 6rem;
+  }
+
+  .banner h1 {
+    font-size: 4rem;
+  }
+}
+
+/*========================
+Section-Title
+=========================*/
+
+.section-title {
+  margin-bottom: 2rem;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.section-title h4 {
+  font-size: 2rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.section-title div {
+  background-color: var(--primaryColor);
+  height: 5px;
+  margin: 0 auto;
+  width: 5rem;
+}
+
+/*========================
+Amenities
+=========================*/
+.amenities {
+  text-align: center;
+  background-color: var(--mainGrey);
+  padding: 5rem 0;
+}
+
+.amenities-center {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+  column-gap: 50px;
+  row-gap: 2rem;
+}
+
+.amenities h6 {
+  text-transform: capitalize;
+}
+
+.amenities p {
+  margin: 0 auto;
+  width: 80%;
+}
+
+.amenities span {
+  color: var(--primaryColor);
+  font-size: 2.5rem;
+}
+
+/*========================
+Feature Rooms
+=========================*/
+.featured-rooms {
+  padding: 5rem 0;
+}
+
+.featured-rooms-center {
+  display: grid;
+  column-gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  margin: 0 auto;
+  row-gap: 2rem;
+  width: 80vw;
+
+}
+
+@media screen and (min-width: 776px) {
+  .featured-rooms-center {
+    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    width: 90vw;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+@media screen and (min-width: 992px) {
+  .featured-rooms-center {
+    max-width: 1170px;
+    width: 95vw;
+  }
+
+}
+
+/*========================
+Room
+=========================*/
+
+.room {
+  box-shadow: var(--lightShadow);
+  transition: var(--mainTransition);
+}
+
+.room:hover {
+  box-shadow: var(--darkShadow);
+}
+
+
+.img-container {
+  position: relative;
+}
+
+.img-container img {
+  display: block;
+  transition: var(--lightShadow);
+  width: 100%;
+}
+
+
+.price-top {
+  background-color: black;
+  border-bottom-right-radius: 1rem;
   color: white;
+  font-size: 0.5rem;
+  left: 0;
+  position: absolute;
+  padding: 5px;
+  top: 0;
+  text-align: center;
+  transition: var(--mainTransition);
 }
 
-.App-link {
-  color: #61dafb;
+.price-top h6 {
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: var(--mainSpacing);
+  margin-bottom: 0;
+  padding: 0 5px 5px 2px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+.room-link {
+  left: 50%;
+  position: absolute;
+  top: 50%;
+  transform: scale(0);
+  transition: var(--mainTransition);
+}
+
+.img-container:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.img-container:hover img {
+  opacity: 0.3;
+}
+
+.img-container:hover .price-top {
+  opacity: 0;
+}
+
+.img-container:hover .room-link {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+
+.room-info {
+  background-color: var(--darkGrey);
+  font-weight: 900;
+  letter-spacing: var(--mainSpacing);
+  padding: 8px 0;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+
+/*========================
+Single Room
+=========================*/
+
+.error {
+  margin: 2rem 0;
+  text-align: center;
+  text-transform: uppercase;
 }
