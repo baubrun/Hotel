@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Amenities from "../Amenities"
 import FeaturedRooms from "../FeaturedRooms"
 
+
 const HomePage = () => {
   return (
     <>
