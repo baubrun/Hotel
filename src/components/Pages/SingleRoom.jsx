@@ -12,7 +12,6 @@ const SingleRoom = (props) => {
 
   const { getRoom } = useContext(RoomContext);
   const room = getRoom(slug);
-  // console.log(room);
   if (!room) {
     return (
       <div className="error">

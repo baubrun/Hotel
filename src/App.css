@@ -470,3 +470,47 @@ Single Room
   row-gap: 2rem;
   width: 80vw;
 }
+@media screen and (min-width: 776px) {
+  .roomList-center {
+    width: 90vw;
+  }
+}
+@media screen and (min-width: 992px) {
+  .roomList-center {
+    width: 95vw;
+    max-width: 1170px;
+  }
+}
+
+.search-container {
+  padding: 5rem 0;
+}
+
+.search-form {
+  display: grid;
+  column-gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(202px, 1fr));
+  margin: 0 auto;
+  row-gap: 2rem;
+  width: 60vw;
+}
+
+.form-group {
+  text-transform: capitalize;
+  padding: 0 2rem;
+
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+
+}
+
+.form-control {
+  background-color: transparent;
+  font-size: 1rem;
+  text-transform: capitalize;
+  /* text-align: center; */
+  width: 100%;
+}

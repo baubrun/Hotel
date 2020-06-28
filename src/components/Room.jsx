@@ -12,7 +12,9 @@ const Room = ({ room }) => {
           <h6>${price}</h6>
           <p>per night</p>
         </div>
-        <Link className="btn-primary room-link" to={`/rooms/${slug}`}>Features</Link>
+        <Link 
+        className="btn-primary room-link" 
+        to={`/rooms/${slug}`}>Features</Link>
       </div>
       <p className="room-info">{name}</p>
     </article>
