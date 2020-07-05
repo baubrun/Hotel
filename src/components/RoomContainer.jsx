@@ -3,37 +3,68 @@ import SearchRooms from "./SearchRooms";
 import RoomList from "./RoomList";
 import { connect } from "react-redux";
 import Spinner from "./Spinner";
-import {mapStateToProps} from "../util/reduxUtils"
+import { mapStateToProps, dispatchStateToProps } from "../util/reduxUtils";
+import { Component } from "react";
+import { formatData } from "../util/utils";
+import data from "../data";
 
+class RoomContainer extends Component {
+  constructor(props) {
+    super(props);
 
-const RoomContainer = (props) => {
-  if (props.loading) {
-    return <Spinner />;
+    this.state = {
+      rooms: [],
+      roomType: "",
+      selectedRooms: [],
+    };
   }
-  return (
-    <>
-      <SearchRooms rooms={props.rooms} />
-      {/* <RoomList rooms={sortedRooms} /> */}
-    </>
-  );
-};
 
+  componentDidMount() {
+    const rooms = formatData(data);
+    this.dispatchRooms(rooms);
+    this.setState({ rooms, selectedRooms: rooms });
+  }
 
+  dispatchRooms = (rooms) => {
+    this.props.getRooms(rooms);
+  };
 
-export default connect(mapStateToProps)(RoomContainer);
+  handleChange = (evt) => {
+    const { value } = evt.target;
+    this.setState({ roomType: value });
+    this.selectRoom(value);
+  };
 
-// const RoomContainer = ({ context }) => {
-//   const { loading, sortedRooms, rooms } = context;
-//   if (loading) {
-//     return <Spinner />;
-//   }
-//   return (
-//     <>
-//       <SearchRooms rooms={rooms} />
-//       <RoomList rooms={sortedRooms} />
-//     </>
-//   );
-// };
+  selectRoom = (roomType) => {
+    const { rooms } = this.state;
+    if (roomType === "all"){
+      this.setState({selectedRooms : rooms})
+      return
+    }
+    const selectedRooms = rooms.filter((r) => r.type === roomType);
+    console.log("selectRoom", selectedRooms);
+    this.setState({selectedRooms})
+  };
 
-// export default withRoomConsumer(RoomContainer);
+  render() {
+    const { rooms, roomType, selectedRooms } = this.state;
 
+      
+    // if (this.props.loading) {
+    //   return <Spinner />;
+    // }
+
+    return (
+      <>
+        <SearchRooms
+          handleChange={this.handleChange}
+          rooms={rooms}
+          roomType={roomType}
+        />
+        <RoomList rooms={selectedRooms} />
+      </>
+    );
+  }
+}
+
+export default connect(mapStateToProps, dispatchStateToProps)(RoomContainer);
