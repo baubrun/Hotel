@@ -1,9 +1,9 @@
 import React from "react";
-import HeroImg from "../HeroImg";
-import Banner from "../Banner";
+import HeroImg from "../components/HeroImg";
+import Banner from "../components/Banner";
 import { Link } from "react-router-dom";
-import Amenities from "../Amenities"
-import FeaturedRoomsContainer from "../FeaturedRoomsContainer"
+import Amenities from "../components/Amenities"
+import FeaturedRoomsContainer from "../components/FeaturedRoomsContainer"
 
 
 const HomePage = () => {

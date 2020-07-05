@@ -15,6 +15,15 @@ class RoomContainer extends Component {
       rooms: [],
       roomType: "",
       selectedRooms: [],
+      capacity: 1,
+      loading: true,
+      minSize: 0,
+      maxSize: 0,
+      price: 0,
+      minPrice: 0,
+      maxPrice: 0,
+      breakfast: false,
+      pets: false,
     };
   }
 

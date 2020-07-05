@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import defaultImg from "../../images/room-1.jpeg";
-import Banner from "../Banner";
+import defaultImg from "../images/room-1.jpeg";
+import Banner from "../components/Banner";
 import { Link } from "react-router-dom";
-import StyledHero from "../StyledHero";
+import StyledHero from "../components/StyledHero";
 import { connect } from "react-redux";
-import { mapStateToProps } from "../../util/reduxUtils";
+import { mapStateToProps } from "../util/reduxUtils";
 
 
 class SingleRoom extends Component {

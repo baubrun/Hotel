@@ -1,6 +1,6 @@
 import React from "react";
-import HeroImg from "../HeroImg";
-import Banner from "../Banner";
+import HeroImg from "../components/HeroImg";
+import Banner from "../components/Banner";
 import { Link } from "react-router-dom";
 
 const NotFound = () => {
