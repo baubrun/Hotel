@@ -1,7 +1,6 @@
-import React, { useContext } from "react";
+import React from "react";
 import SearchRooms from "./SearchRooms";
 import RoomList from "./RoomList";
-// import { withRoomConsumer } from "../context";
 import { connect } from "react-redux";
 import Spinner from "./Spinner";
 import {mapStateToProps} from "../util/reduxUtils"

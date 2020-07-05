@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import data from "../data"
 import FeaturedRooms from "./FeaturedRooms"
-import {mapStateToProps, dispatchStateToProps} from "../util/reduxUtils"
+import {dispatchStateToProps} from "../util/reduxUtils"
+import {formatData} from "../util/utils"
 import { connect } from "react-redux";
-// import {getRoomsAction, isLoadingAction} from "../actions/actions"
 
 
 class FeaturedRoomsContainer extends Component {
@@ -14,32 +14,21 @@ class FeaturedRoomsContainer extends Component {
              featuredRooms: []
         }
     }
-    formatData = () => {
-        let tempItems = data.map((item) => {
-          let id = item.sys.id;
-          let images = item.fields.images.map((i) => i.fields.file.url);
-          let room = { ...item.fields, images, id };
-          return room;
-        });
-        return tempItems;
-      };
 
-      dispatchRooms = () =>{
-          this.props.getRooms(this.state.rooms)
+    componentDidMount(){
+        const rooms = formatData(data)
+        this.dispatchRooms(rooms)
+        this.getFeaturedRooms(rooms)
+    }
+
+      dispatchRooms = (rooms) =>{
+          this.props.getRooms(rooms)
       }
     
       getFeaturedRooms = rooms => {
         const fr = rooms.filter(room => room.featured === true)
         this.setState({featuredRooms: fr})
       }
-
-    componentDidMount(){
-        const rooms = this.formatData(data)
-        this.dispatchRooms(rooms)
-        // const fr = rooms.filter(room => room.featured === true)
-        // this.setState({featuredRooms: fr})
-        this.getFeaturedRooms(rooms)
-    }
 
     render() {
         return (
@@ -48,14 +37,6 @@ class FeaturedRoomsContainer extends Component {
     }
 }
 
-// const dispatchStateToProps = (dispatch) => {
-//     return {
-//         getRooms: (rooms) => dispatch(getRoomsAction(rooms)),
-//         loading: () => dispatch(isLoadingAction())
-//     }
-// }
 
-
-// export default FeaturedRoomsContainer
 export default connect(null, dispatchStateToProps)(FeaturedRoomsContainer)
 

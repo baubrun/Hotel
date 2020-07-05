@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
-import { RoomContext } from "../context";
+import React from "react";
 import Title from "../components/Title";
+import {getUniqueTypes} from "../util/utils"
+import { connect } from "react-redux";
+import { mapStateToProps } from "../util/reduxUtils";
 
-const getUniqueTypes = (items, value) => {
-  return [...new Set(items.map((i) => i[value]))];
-};
 
-const SearchRooms = ({ rooms }) => {
-  const context = useContext(RoomContext);
+const SearchRooms = (props) => {
   const {
     capacity,
     minSize,
@@ -19,16 +17,16 @@ const SearchRooms = ({ rooms }) => {
     pets,
     handleChange,
     type,
-  } = context;
+  } = props;
 
-  let types = getUniqueTypes(rooms, "type");
+  let types = getUniqueTypes(props.rooms, "type");
+  console.log('types :>> ', types);
   types = ["all", ...types];
   return (
     <>
       <section className="search-container">
         <Title title="Search Rooms" />
         <form className="search-from">
-          {/* select type*/}
           <div className="form-group">
             <label htmlFor="type">room type</label>
             <select
@@ -47,11 +45,10 @@ const SearchRooms = ({ rooms }) => {
               })}
             </select>
           </div>
-          {/* end select type*/}
         </form>
       </section>
     </>
   );
 };
 
-export default SearchRooms;
+export default connect(mapStateToProps)(SearchRooms);

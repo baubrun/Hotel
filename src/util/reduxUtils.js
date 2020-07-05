@@ -1,4 +1,7 @@
-import {getRoomsAction, isLoadingAction} from "../actions/actions"
+import {
+    getRoomsAction,
+    isLoadingAction
+} from "../actions/actions"
 
 export const dispatchStateToProps = dispatch => {
     return {

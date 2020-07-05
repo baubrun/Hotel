@@ -50,7 +50,7 @@ const SingleRoom = (props) => {
             <h6>price: ${room.price}</h6>
             <h6>size: {(room.size / 0.3048).toFixed(0)} m<sup>2</sup></h6>
             <h6> max capacity : {room.capacity > 1 ? `${room.capacity} people`: `${room.capacity} person`}</h6>
-            <h6>{room.pets? "Pets" : "No pets"} allowed</h6>
+            <h6>{room.pets ? "Pets" : "No pets"} allowed</h6>
         <h6>{room.breakfast && "Free breakfast"}</h6>
           </article>
         </div>
