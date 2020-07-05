@@ -1,21 +1,40 @@
 import React, { useContext } from "react";
 import SearchRooms from "./SearchRooms";
 import RoomList from "./RoomList";
-import { withRoomConsumer } from "../context";
+// import { withRoomConsumer } from "../context";
+import { connect } from "react-redux";
 import Spinner from "./Spinner";
+import {mapStateToProps} from "../util/reduxUtils"
 
-const RoomContainer = ({ context }) => {
-  const { loading, sortedRooms, rooms } = context;
-  if (loading) {
+
+const RoomContainer = (props) => {
+  if (props.loading) {
     return <Spinner />;
   }
   return (
     <>
-      <SearchRooms rooms={rooms} />
-      <RoomList rooms={sortedRooms} />
+      <SearchRooms rooms={props.rooms} />
+      {/* <RoomList rooms={sortedRooms} /> */}
     </>
   );
 };
 
-export default withRoomConsumer(RoomContainer);
+
+
+export default connect(mapStateToProps)(RoomContainer);
+
+// const RoomContainer = ({ context }) => {
+//   const { loading, sortedRooms, rooms } = context;
+//   if (loading) {
+//     return <Spinner />;
+//   }
+//   return (
+//     <>
+//       <SearchRooms rooms={rooms} />
+//       <RoomList rooms={sortedRooms} />
+//     </>
+//   );
+// };
+
+// export default withRoomConsumer(RoomContainer);
 

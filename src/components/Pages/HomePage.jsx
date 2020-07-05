@@ -3,7 +3,7 @@ import HeroImg from "../HeroImg";
 import Banner from "../Banner";
 import { Link } from "react-router-dom";
 import Amenities from "../Amenities"
-import FeaturedRooms from "../FeaturedRooms"
+import FeaturedRoomsContainer from "../FeaturedRoomsContainer"
 
 
 const HomePage = () => {
@@ -17,7 +17,7 @@ const HomePage = () => {
       </Banner>
     </HeroImg>
     <Amenities />
-    <FeaturedRooms />
+    <FeaturedRoomsContainer />
     </>
   );
 };
