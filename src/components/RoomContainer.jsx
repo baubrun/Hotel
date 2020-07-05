@@ -2,7 +2,6 @@ import React from "react";
 import SearchRooms from "./SearchRooms";
 import RoomList from "./RoomList";
 import { connect } from "react-redux";
-import Spinner from "./Spinner";
 import { mapStateToProps, dispatchStateToProps } from "../util/reduxUtils";
 import { Component } from "react";
 import { formatData } from "../util/utils";
@@ -42,18 +41,11 @@ class RoomContainer extends Component {
       return
     }
     const selectedRooms = rooms.filter((r) => r.type === roomType);
-    console.log("selectRoom", selectedRooms);
     this.setState({selectedRooms})
   };
 
   render() {
     const { rooms, roomType, selectedRooms } = this.state;
-
-      
-    // if (this.props.loading) {
-    //   return <Spinner />;
-    // }
-
     return (
       <>
         <SearchRooms
