@@ -458,6 +458,10 @@ Single Room
   }
 }
 
+/*========================
+Room List
+=========================*/
+
 .roomList {
   padding: 5rem 0;
 }
@@ -482,9 +486,17 @@ Single Room
   }
 }
 
+
+/*========================
+Search Room
+=========================*/
+
+
+
 .search-container {
   padding: 5rem 0;
 }
+
 
 .search-form {
   display: grid;
@@ -511,6 +523,37 @@ Single Room
   background-color: transparent;
   font-size: 1rem;
   text-transform: capitalize;
-  /* text-align: center; */
   width: 100%;
+}
+
+
+.size-inputs {
+  display: flex;
+}
+
+.size-input {
+  border: 1px solid var(--primaryColor);
+  border-radius: 5px;
+  margin-right: 5px;
+  padding: 5px;
+  width: 40%;
+}
+
+.single-extra label {
+  display: inline-block;
+  margin-left: 0.5rem;
+  text-transform: capitalize;
+
+}
+
+@media screen and (min-width: 776px) {
+  .search-form {
+    width: 70vw;
+  }
+}
+@media screen and (min-width: 992px) {
+  .search-form {
+    max-width: 1170px;
+    width: 95vw;
+  }
 }

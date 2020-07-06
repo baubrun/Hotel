@@ -19,3 +19,13 @@ export const getUniqueTypes = (items, value) => {
     });
     return tempItems;
 };
+
+
+export const roomFilterByNum = [
+    "capacity",  
+    // "minPrice",
+    // "maxPrice",
+    // "minSize",
+    // "maxSize",
+    "price",
+]
