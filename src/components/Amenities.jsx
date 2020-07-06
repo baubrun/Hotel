@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Title from "./Title";
 import { MdLocalLaundryService } from "react-icons/md";
 import { FaCocktail, FaUmbrellaBeach } from "react-icons/fa";
@@ -6,7 +6,7 @@ import { FiClock } from "react-icons/fi";
 
 const fakeText = "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Animi, fugit!"
 const Amenities = () => {
-  const [amenities, setAmenitites] = useState([
+  const amenities = [
     {
       icon: <FiClock />,
       title: "24 hour service",
@@ -27,7 +27,7 @@ const Amenities = () => {
       title: "Private Beach",
       info: fakeText,
     },
-  ]);
+  ];
   
   return (
     <section className="amenities">

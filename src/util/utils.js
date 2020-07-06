@@ -21,11 +21,3 @@ export const getUniqueTypes = (items, value) => {
 };
 
 
-export const roomFilterByNum = [
-    "capacity",  
-    // "minPrice",
-    // "maxPrice",
-    // "minSize",
-    // "maxSize",
-    "price",
-]

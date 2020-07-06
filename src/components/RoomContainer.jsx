@@ -4,7 +4,7 @@ import RoomList from "./RoomList";
 import { connect } from "react-redux";
 import { mapStateToProps, dispatchStateToProps } from "../util/reduxUtils";
 import { Component } from "react";
-import { formatData, roomFilterByNum } from "../util/utils";
+import { formatData } from "../util/utils";
 import data from "../data";
 
 class RoomContainer extends Component {
