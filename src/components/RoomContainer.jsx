@@ -25,7 +25,6 @@ const RoomContainer = () => {
 
   useEffect(() => {
     const data = formatData(rooms);
-    // console.log("RoomContainer :>> ", data);
     const maxPrice = Math.max(...data.map((item) => item.price));
     const maxSize = Math.max(...data.map((item) => item.size));
 

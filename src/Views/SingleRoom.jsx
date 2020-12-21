@@ -31,13 +31,12 @@ const SingleRoom = (props) => {
 
   const getRoom = (slug) => {
     let tempRooms = state.rooms
-    const room = tempRooms.find((item) => item.fields.slug === slug);
-    // const room = tempRooms.find((item) => item.slug === slug);
+    const room = tempRooms.filter((item) => item.fields.slug === slug);
     if(room){
-      console.log('room :>> ', room);
-      // console.log('\n getRoom find Room:>> ', formatData(room));
-      console.log('room.length :>> ', room.length);
-      return room.fields;
+     const found = formatData(room)[0]
+      console.log('\n found')
+      // return room.fields;
+      return found;
     }
   };
 
@@ -73,7 +72,7 @@ const SingleRoom = (props) => {
 
   return (
     <>
-      <StyledHero hero="roomsHero" img={images[0]}>
+      <StyledHero hero="roomsHero" img={`${process.env.PUBLIC_URL}/images/${images[0]}`}>
         <Banner title={`${name} room`}>
           <Link to="/rooms" className="btn-primary">
             Return to Rooms
@@ -84,7 +83,7 @@ const SingleRoom = (props) => {
       <section className="single-room">
         <div className="single-room-images">
           {images.slice(1).map((img, idx) => {
-            return <img key={idx} src={img} alt={name} />;
+            return <img key={idx} src={`${process.env.PUBLIC_URL}/images/${img}`} alt={name} />;
           })}
         </div>
         <div className="single-room-info">
