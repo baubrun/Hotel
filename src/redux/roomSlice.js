@@ -1,7 +1,6 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { domain } from "../api";
-import { formatData } from "../util";
 
 export const getRooms = createAsyncThunk("/getRooms", async () => {
   try {

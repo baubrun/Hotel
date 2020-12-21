@@ -2,62 +2,57 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import defaultImg from "../images/room-1.jpeg";
 import Banner from "../components/Banner";
 import { Link } from "react-router-dom";
 import StyledHero from "../components/StyledHero";
+
 import { roomsState } from "../redux/roomSlice";
 import { formatData } from "../util";
-
 
 const SingleRoom = (props) => {
   const { rooms } = useSelector(roomsState);
   const history = useHistory();
 
   const [state, setState] = useState({
-    defaultImage: defaultImg,
+    defaultImage: `${process.env.PUBLIC_URL}/images/$room-1.jpeg`,
     slug: props.match.params.slug,
     rooms,
     room: {},
   });
 
-
   useEffect(() => {
-    if (rooms.length < 1){
-      history.push("/rooms")
+    if (rooms.length < 1) {
+      history.push("/rooms");
     }
   }, [rooms]);
 
 
   const getRoom = (slug) => {
-    let tempRooms = state.rooms
+    let tempRooms = state.rooms;
     const room = tempRooms.filter((item) => item.fields.slug === slug);
-    if(room){
-     const found = formatData(room)[0]
-      console.log('\n found')
-      // return room.fields;
+    if (room) {
+      const found = formatData(room)[0];
       return found;
     }
   };
+
 
   useEffect(() => {
     setState({ ...state, room: getRoom(state.slug) });
   }, []);
 
+  const {
+    name,
+    description,
+    capacity,
+    size,
+    price,
+    extras,
+    breakfast,
+    pets,
+    images,
+  } = state && state.room;
 
-    const {
-      name,
-      description,
-      capacity,
-      size,
-      price,
-      extras,
-      breakfast,
-      pets,
-      images
-    } = state && state.room
-
-  
   if (!images || !extras) {
     return (
       <div className="error">
@@ -69,10 +64,12 @@ const SingleRoom = (props) => {
     );
   }
 
-
   return (
     <>
-      <StyledHero hero="roomsHero" img={`${process.env.PUBLIC_URL}/images/${images[0]}`}>
+      <StyledHero
+        hero="roomsHero"
+        img={`${process.env.PUBLIC_URL}/images/${images[0]}`}
+      >
         <Banner title={`${name} room`}>
           <Link to="/rooms" className="btn-primary">
             Return to Rooms
@@ -83,7 +80,13 @@ const SingleRoom = (props) => {
       <section className="single-room">
         <div className="single-room-images">
           {images.slice(1).map((img, idx) => {
-            return <img key={idx} src={`${process.env.PUBLIC_URL}/images/${img}`} alt={name} />;
+            return (
+              <img
+                key={idx}
+                src={`${process.env.PUBLIC_URL}/images/${img}`}
+                alt={name}
+              />
+            );
           })}
         </div>
         <div className="single-room-info">
@@ -99,9 +102,7 @@ const SingleRoom = (props) => {
             </h6>
             <h6>
               max capacity :
-              {capacity > 1
-                ? `${capacity} people`
-                : `${capacity} person`}
+              {capacity > 1 ? `${capacity} people` : `${capacity} person`}
             </h6>
             <h6>{pets ? "Pets" : "No pets"} allowed</h6>
             <h6>{breakfast && "Free breakfast"}</h6>

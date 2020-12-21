@@ -38,9 +38,16 @@ const RoomContainer = () => {
     });
   }, []);
 
+  const handleChange = (evt) => {
+    const target = evt.target;
+    console.log("evt.target :>> ", evt.target);
+    const value = target.type === "checkbox" ? target.checked : target.value;
+    setState({ ...state, [evt.target.name]: value });
+  };
 
   // useEffect(() => {
-  //   if (state.selectedRooms) selectRoom();
+  //   selectRoom();
+  //   // console.log('***** :>> ', )
   // }, [
   //   state.capacity,
   //   state.type,
@@ -50,14 +57,6 @@ const RoomContainer = () => {
   //   state.minSize,
   //   state.maxSize,
   // ]);
-
-
-  const handleChange = (evt) => {
-    const target = evt.target;
-    const value = target.type === "checkbox" ? target.checked : target.value;
-    setState({ [evt.target.name]: value });
-    selectRoom();
-  };
 
   const selectRoom = () => {
     let {
@@ -70,7 +69,9 @@ const RoomContainer = () => {
       breakfast,
       pets,
     } = state;
-    let sr = [...rooms];
+    let sr = rooms;
+    // console.log("rooms :>> ", rooms);
+
     capacity = parseInt(capacity);
     price = parseInt(price);
     minSize = parseInt(minSize);

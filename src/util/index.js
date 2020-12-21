@@ -1,5 +1,7 @@
 
 export const getUniqueTypes = (items, value) => {
+    
+    console.log('getUniqueTypes items :>>', items)
     const ut = [...new Set(items.map((i) => i[value]))]
     return ut;
   };
