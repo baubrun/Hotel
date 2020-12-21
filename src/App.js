@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch} from "react-redux";
+
 import "./App.css";
 import HomePage from "./Views/HomePage";
 import NotFound from "./Views/NotFound";
@@ -7,9 +9,19 @@ import SingleRoom from "./Views/SingleRoom";
 import Navbar from "./components/Navbar"
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+import {getRooms} from "./redux/roomSlice"
 
 
 const App = () => {
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getRooms())
+  }, [])
+
+  
+
+
   return (
     <BrowserRouter>
     <Navbar />

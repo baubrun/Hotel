@@ -1,42 +1,25 @@
-import React, { Component } from 'react'
-import data from "../data"
-import FeaturedRooms from "./FeaturedRooms"
-import {dispatchStateToProps} from "../util/reduxUtils"
-import {formatData} from "../util/utils"
-import { connect } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
+import FeaturedRooms from "./FeaturedRooms";
+import { formatData } from "../util/utils";
+import { roomsState } from "../redux/roomSlice";
 
-class FeaturedRoomsContainer extends Component {
-    constructor(props) {
-        super(props)
-    
-        this.state = {
-             featuredRooms: []
-        }
-    }
+const FeaturedRoomsContainer = () => {
+  const [featuredRooms, setFeaturedRooms] = useState([]);
+  const { rooms } = useSelector(roomsState);
 
-    componentDidMount(){
-        const rooms = formatData(data)
-        this.dispatchRooms(rooms)
-        this.getFeaturedRooms(rooms)
-    }
+  useEffect(() => {
+    const data = formatData(rooms);
+    getFeaturedRooms(data);
+  }, []);
 
-      dispatchRooms = (rooms) =>{
-          this.props.getRooms(rooms)
-      }
-    
-      getFeaturedRooms = rooms => {
-        const fr = rooms.filter(room => room.featured === true)
-        this.setState({featuredRooms: fr})
-      }
+  const getFeaturedRooms = (rooms) => {
+    const fr = rooms.filter((room) => room.featured === true);
+    setFeaturedRooms({ featuredRooms: fr });
+  };
 
-    render() {
-        return (
-            <FeaturedRooms rooms={this.state.featuredRooms}/>
-        )
-    }
-}
+  return <FeaturedRooms rooms={featuredRooms} />;
+};
 
-
-export default connect(null, dispatchStateToProps)(FeaturedRoomsContainer)
-
+export default FeaturedRoomsContainer;

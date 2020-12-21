@@ -1,72 +1,71 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch} from "react-redux";
+
 import SearchRooms from "./SearchRooms";
 import RoomList from "./RoomList";
-import { connect } from "react-redux";
-import { mapStateToProps, dispatchStateToProps } from "../util/reduxUtils";
-import { Component } from "react";
+
 import { formatData } from "../util/utils";
 import data from "../data";
 
-class RoomContainer extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      rooms: [],
-      type: "all",
-      selectedRooms: [],
-      capacity: 1,
-      minSize: 0,
-      maxSize: 0,
-      price: 0,
-      minPrice: 0,
-      maxPrice: 0,
-      breakfast: false,
-      pets: false,
-    };
-  }
 
-  componentDidMount() {
-    const rooms = formatData(data);
-    this.dispatchRooms(rooms);
-    const maxPrice = Math.max(...rooms.map((item) => item.price));
-    const maxSize = Math.max(...rooms.map((item) => item.size));
-    console.log("in component mount set state");
-    this.setState({
+const RoomContainer = () => {
+  const dispatch = useDispatch()
+  const { rooms } = useSelector(roomsState);
+  const [state, setState] = useState({
+    rooms: [],
+    type: "all",
+    selectedRooms: [],
+    capacity: 1,
+    minSize: 0,
+    maxSize: 0,
+    price: 0,
+    minPrice: 0,
+    maxPrice: 0,
+    breakfast: false,
+    pets: false,
+  })
+    
+  
+
+  useEffect(() => {
+    const data = formatData(rooms);
+    const maxPrice = Math.max(...data.map((item) => item.price));
+    const maxSize = Math.max(...data.map((item) => item.size));
+    setState({
+      ...state,
       maxPrice,
       maxSize,
       price: maxPrice,
       rooms,
       selectedRooms: rooms,
     });
-  }
+  }, [])
 
-  componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.capacity !== this.state.capacity ||
-      prevState.type !== this.state.type ||
-      prevState.price !== this.state.price ||
-      prevState.breakfast !== this.state.breakfast ||
-      prevState.pets !== this.state.pets ||
-      prevState.minSize !== this.state.minSize ||
-      prevState.maxSize !== this.state.maxSize 
+  
+    
+  useEffect(() => {
+    selectRoom()
+  }, [
+    state.capacity,
+    state.type,
+    state.price,
+    state.breakfast,
+    state.pets,
+    state.minSize,
+    state.maxSize,
+  ])
 
-    ) {
-      this.selectRoom();
-    }
-  }
 
-  dispatchRooms = (rooms) => {
-    this.props.getRooms(rooms);
-  };
 
-  handleChange = (evt) => {
+
+  const handleChange = (evt) => {
     const target = evt.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    this.setState({ [evt.target.name]: value }, this.selectRoom());
+    setState({ [evt.target.name]: value }, selectRoom());
   };
 
-  selectRoom = () => {
+  const selectRoom = () => {
     let {
       rooms,
       type,
@@ -76,7 +75,7 @@ class RoomContainer extends Component {
       maxSize,
       breakfast,
       pets,
-    } = this.state;
+    } = state;
     let sr = [...rooms];
     capacity = parseInt(capacity);
     price = parseInt(price);
@@ -98,17 +97,16 @@ class RoomContainer extends Component {
     if (pets) {
       sr = sr.filter((r) => r.pets === true);
     }
-    this.setState({ selectedRooms: sr });
+    setState({...state, selectedRooms: sr });
   };
 
-  render() {
     return (
       <>
-        <SearchRooms handleChange={this.handleChange} state={this.state} />
-        <RoomList rooms={this.state.selectedRooms} />
+        <SearchRooms handleChange={handleChange} state={state} />
+        <RoomList rooms={state.selectedRooms} />
       </>
     );
   }
 }
 
-export default connect(mapStateToProps, dispatchStateToProps)(RoomContainer);
+export default RoomContainer
