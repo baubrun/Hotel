@@ -6,6 +6,7 @@ import Spinner from "./Spinner"
 
 
 const FeaturedRooms = (props) => {
+    console.log('FeaturedRooms :>> ', props.rooms);
     const _rooms = props.rooms.map(room => {
         return <Room key={room.id} room={room}/>
     })

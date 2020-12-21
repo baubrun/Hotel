@@ -16,9 +16,8 @@ const SingleRoom = (props) => {
     defaultImage: defaultImg,
     slug: props.match.params.slug,
     rooms,
-    room: "",
+    room: {},
   });
-
 
 
 
@@ -30,15 +29,16 @@ const SingleRoom = (props) => {
 
 
   useEffect(() => {
-    console.log('SingleRoom rooms :>> ', rooms);
     setState({ ...state, room: getRoom(state.slug) });
   }, []);
 
   const getRoom = (slug) => {
-    let tempRooms = [...state.rooms];
+    let tempRooms = rooms
     const room = tempRooms.find((item) => item.fields.slug === slug);
-    console.log('SingleRoom room :>> ', room);
-    return room;
+    if(room){
+      console.log('SingleRoom room :>> ', room.fields);
+      return room.fields;
+    }
   };
 
     const {
@@ -51,7 +51,7 @@ const SingleRoom = (props) => {
       breakfast,
       pets,
       images
-    } = state && state.room
+    } = state.room
 
   
   if (!images || !extras) {
@@ -64,6 +64,7 @@ const SingleRoom = (props) => {
       </div>
     );
   }
+
   return (
     <>
       <StyledHero hero="roomsHero" img={images[0]}>
