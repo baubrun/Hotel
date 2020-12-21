@@ -1,8 +1,7 @@
 import React from "react";
 import Title from "../components/Title";
 import { getUniqueTypes } from "../util/utils";
-import { connect } from "react-redux";
-import { dispatchStateToProps } from "../util/reduxUtils";
+
 
 const options = (arr) => {
   return arr.map((item, idx) => {
@@ -15,7 +14,7 @@ const options = (arr) => {
 };
 
 const SearchRooms = (props) => {
-  let {
+  const {
     capacity,
     minPrice,
     maxPrice,
@@ -40,7 +39,7 @@ const SearchRooms = (props) => {
               min={minPrice}
               max={maxPrice}
               name="price"
-              onChange={props.handleChange}
+              onChange={(evt) => props.handleChange(evt)}
               type="range"
               value={price}
             />
@@ -52,7 +51,7 @@ const SearchRooms = (props) => {
               className="form-control"
               id="type"
               name="type"
-              onChange={props.handleChange}
+              onChange={(evt) => props.handleChange(evt)}
               value={type}
             >
               {options(types)}
@@ -64,7 +63,7 @@ const SearchRooms = (props) => {
               className="form-control"
               id="capacity"
               name="capacity"
-              onChange={props.handleChange}
+              onChange={(evt) => props.handleChange(evt)}
               value={capacity}
             >
               {options(cpc)}
@@ -76,14 +75,14 @@ const SearchRooms = (props) => {
               className="size-input"
               id="size"
               name="minSize"
-              onChange={props.handleChange}
+              onChange={(evt) => props.handleChange(evt)}
               value={minSize}
             />
             <input
               className="size-input"
               id="size"
               name="maxSize"
-              onChange={props.handleChange}
+              onChange={(evt) => props.handleChange(evt)}
               value={maxSize}
             />
           </div>
@@ -91,7 +90,7 @@ const SearchRooms = (props) => {
               <input
                 name="breakfast"
                 id="breakfast"
-                onChange={props.handleChange}
+                onChange={(evt) => props.handleChange(evt)}
                 type="checkbox"
               />
               <label htmlFor="breakfast" checked>
@@ -102,7 +101,7 @@ const SearchRooms = (props) => {
             <input
               name="pets"
               id="pets"
-              onChange={props.handleChange}
+              onChange={(evt) => props.handleChange(evt)}
               type="checkbox"
             />
             <label htmlFor="pets" checked>
@@ -115,4 +114,4 @@ const SearchRooms = (props) => {
   );
 };
 
-export default connect(null, dispatchStateToProps)(SearchRooms);
+export default SearchRooms

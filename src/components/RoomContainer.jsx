@@ -1,16 +1,13 @@
-import React, { useEffect } from "react";
-import { useDispatch} from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import SearchRooms from "./SearchRooms";
 import RoomList from "./RoomList";
 
 import { formatData } from "../util/utils";
-import data from "../data";
-
-
+import { roomsState } from "../redux/roomSlice";
 
 const RoomContainer = () => {
-  const dispatch = useDispatch()
   const { rooms } = useSelector(roomsState);
   const [state, setState] = useState({
     rooms: [],
@@ -24,45 +21,46 @@ const RoomContainer = () => {
     maxPrice: 0,
     breakfast: false,
     pets: false,
-  })
-    
-  
+  });
 
   useEffect(() => {
     const data = formatData(rooms);
+    console.log("RoomContainer :>> ", data);
+
     const maxPrice = Math.max(...data.map((item) => item.price));
+    console.log("maxPrice :>> ", maxPrice);
     const maxSize = Math.max(...data.map((item) => item.size));
+    console.log("maxSize :>> ", maxSize);
+
     setState({
       ...state,
       maxPrice,
       maxSize,
       price: maxPrice,
-      rooms,
-      selectedRooms: rooms,
+      rooms: data,
+      selectedRooms: data,
     });
-  }, [])
-
-  
-    
-  useEffect(() => {
-    selectRoom()
-  }, [
-    state.capacity,
-    state.type,
-    state.price,
-    state.breakfast,
-    state.pets,
-    state.minSize,
-    state.maxSize,
-  ])
+  }, []);
 
 
+  // useEffect(() => {
+  //   if (state.selectedRooms) selectRoom();
+  // }, [
+  //   state.capacity,
+  //   state.type,
+  //   state.price,
+  //   state.breakfast,
+  //   state.pets,
+  //   state.minSize,
+  //   state.maxSize,
+  // ]);
 
 
   const handleChange = (evt) => {
     const target = evt.target;
     const value = target.type === "checkbox" ? target.checked : target.value;
-    setState({ [evt.target.name]: value }, selectRoom());
+    setState({ [evt.target.name]: value });
+    selectRoom();
   };
 
   const selectRoom = () => {
@@ -90,23 +88,22 @@ const RoomContainer = () => {
     }
 
     sr = sr.filter((r) => r.price <= price);
-    sr = sr.filter((r) => r.size >= minSize && r.size <= maxSize)
+    sr = sr.filter((r) => r.size >= minSize && r.size <= maxSize);
     if (breakfast) {
       sr = sr.filter((r) => r.breakfast === true);
     }
     if (pets) {
       sr = sr.filter((r) => r.pets === true);
     }
-    setState({...state, selectedRooms: sr });
+    setState({ ...state, selectedRooms: sr });
   };
 
-    return (
-      <>
-        <SearchRooms handleChange={handleChange} state={state} />
-        <RoomList rooms={state.selectedRooms} />
-      </>
-    );
-  }
-}
+  return (
+    <>
+      <SearchRooms handleChange={handleChange} state={state} />
+      <RoomList rooms={state.selectedRooms} />
+    </>
+  );
+};
 
-export default RoomContainer
+export default RoomContainer;

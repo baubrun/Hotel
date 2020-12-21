@@ -30,10 +30,11 @@ export const roomsSlice = createSlice({
     },
     [getRooms.fulfilled]: (state, action) => {
       state.loading = false;
+      const {error, rooms} = action.payload
       if (error) {
         state.error = error;
       } else {
-        state.rooms = action.payload
+        state.rooms = [...rooms]
       }
     },
     [getRooms.rejected]: (state, action) => {

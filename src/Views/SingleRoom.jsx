@@ -1,55 +1,59 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 import defaultImg from "../images/room-1.jpeg";
 import Banner from "../components/Banner";
 import { Link } from "react-router-dom";
 import StyledHero from "../components/StyledHero";
-import { connect } from "react-redux";
-import { mapStateToProps } from "../util/reduxUtils";
+import { roomsState } from "../redux/roomSlice";
+
+const SingleRoom = (props) => {
+  const { rooms } = useSelector(roomsState);
+  const history = useHistory();
+
+  const [state, setState] = useState({
+    defaultImage: defaultImg,
+    slug: props.match.params.slug,
+    rooms,
+    room: "",
+  });
 
 
-class SingleRoom extends Component {
-  constructor(props) {
-    super(props)
-  
-    this.state = {
-      defaultImage: defaultImg,
-       slug: props.match.params.slug,
-       rooms: this.props.rooms,
-       room: ""
+
+
+  useEffect(() => {
+    if (rooms.length < 1){
+      history.push("/rooms")
     }
-  }
-  
-  componentDidMount() {
-    this.setState({room: this.getRoom(this.state.slug) });
-  }
+  }, [rooms]);
 
-  getRoom = (slug) => {
-    let tempRooms = [...this.state.rooms];
-    const room = tempRooms.find((item) => item.slug === slug);
+
+  useEffect(() => {
+    console.log('SingleRoom rooms :>> ', rooms);
+    setState({ ...state, room: getRoom(state.slug) });
+  }, []);
+
+  const getRoom = (slug) => {
+    let tempRooms = [...state.rooms];
+    const room = tempRooms.find((item) => item.fields.slug === slug);
+    console.log('SingleRoom room :>> ', room);
     return room;
   };
 
-  getImages = () => {
-      const images = this.state.room.images
-      return {
-        mainImg: images[0],
-        restImages: images.slice(1)
-      }
-  }
+    const {
+      name,
+      description,
+      capacity,
+      size,
+      price,
+      extras,
+      breakfast,
+      pets,
+      images
+    } = state && state.room
 
-render(){
-  const {
-    name,
-    description,
-    capacity,
-    size,
-    price,
-    extras,
-    breakfast,
-    pets,
-    images
-  } = this.state.room
-
+  
   if (!images || !extras) {
     return (
       <div className="error">
@@ -62,7 +66,6 @@ render(){
   }
   return (
     <>
-
       <StyledHero hero="roomsHero" img={images[0]}>
         <Banner title={`${name} room`}>
           <Link to="/rooms" className="btn-primary">
@@ -85,10 +88,17 @@ render(){
           <article className="info">
             <h3>Info</h3>
             <h6>price: ${price}</h6>
-            <h6>size: {(size / 0.3048).toFixed(0)} m<sup>2</sup></h6>
-            <h6> max capacity : {capacity > 1 ? `${capacity} people`: `${capacity} person`}</h6>
+            <h6>
+              size: {(size / 0.3048).toFixed(0)} m<sup>2</sup>
+            </h6>
+            <h6>
+              max capacity :
+              {capacity > 1
+                ? `${capacity} people`
+                : `${capacity} person`}
+            </h6>
             <h6>{pets ? "Pets" : "No pets"} allowed</h6>
-        <h6>{breakfast && "Free breakfast"}</h6>
+            <h6>{breakfast && "Free breakfast"}</h6>
           </article>
         </div>
       </section>
@@ -96,14 +106,12 @@ render(){
         <h6>Extras</h6>
         <ul className="extras">
           {extras.map((item, idx) => {
-            return <li key={idx}>- {item}</li>
-            
+            return <li key={idx}>- {item}</li>;
           })}
         </ul>
       </section>
     </>
   );
 };
-}
 
-export default connect(mapStateToProps)(SingleRoom);
+export default SingleRoom;

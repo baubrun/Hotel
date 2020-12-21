@@ -16,7 +16,7 @@ const FeaturedRoomsContainer = () => {
 
   const getFeaturedRooms = (rooms) => {
     const fr = rooms.filter((room) => room.featured === true);
-    setFeaturedRooms({ featuredRooms: fr });
+    setFeaturedRooms(fr);
   };
 
   return <FeaturedRooms rooms={featuredRooms} />;
