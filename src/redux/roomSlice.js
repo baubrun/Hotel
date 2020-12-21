@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { domain } from "../api";
+import { formatData } from "../util";
 
 export const getRooms = createAsyncThunk("/getRooms", async () => {
   try {
@@ -34,7 +35,7 @@ export const roomsSlice = createSlice({
       if (error) {
         state.error = error;
       } else {
-        state.rooms = [...rooms]
+        state.rooms = rooms
       }
     },
     [getRooms.rejected]: (state, action) => {

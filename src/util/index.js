@@ -1,4 +1,3 @@
-import data from "../data"
 
 export const getUniqueTypes = (items, value) => {
     const ut = [...new Set(items.map((i) => i[value]))]
@@ -6,7 +5,7 @@ export const getUniqueTypes = (items, value) => {
   };
   
 
-  export const formatData = () => {
+  export const formatData = (data) => {
     let tempItems = data.map((item) => {
         let id = item.sys.id;
         let images = item.fields.images.map((i) => i.fields.file.url);

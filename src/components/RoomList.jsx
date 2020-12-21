@@ -3,8 +3,7 @@ import Room  from "./Room"
 
 
 const RoomList = ({rooms}) => {
-
-    // console.log('rooms :>> ', rooms);
+    // console.log(' RoomListrooms :>> ', rooms);
     if (rooms.length === 0){
         return (
             <div className="empty-search">

@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import SearchRooms from "./SearchRooms";
 import RoomList from "./RoomList";
 
-import { formatData } from "../util/utils";
+import { formatData } from "../util";
 import { roomsState } from "../redux/roomSlice";
 
 const RoomContainer = () => {
@@ -25,12 +25,9 @@ const RoomContainer = () => {
 
   useEffect(() => {
     const data = formatData(rooms);
-    console.log("RoomContainer :>> ", data);
-
+    // console.log("RoomContainer :>> ", data);
     const maxPrice = Math.max(...data.map((item) => item.price));
-    console.log("maxPrice :>> ", maxPrice);
     const maxSize = Math.max(...data.map((item) => item.size));
-    console.log("maxSize :>> ", maxSize);
 
     setState({
       ...state,

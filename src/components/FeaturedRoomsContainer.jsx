@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import FeaturedRooms from "./FeaturedRooms";
-import { formatData } from "../util/utils";
+import { formatData } from "../util";
 import { roomsState } from "../redux/roomSlice";
 
 const FeaturedRoomsContainer = () => {

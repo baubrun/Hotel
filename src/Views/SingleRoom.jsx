@@ -7,6 +7,8 @@ import Banner from "../components/Banner";
 import { Link } from "react-router-dom";
 import StyledHero from "../components/StyledHero";
 import { roomsState } from "../redux/roomSlice";
+import { formatData } from "../util";
+
 
 const SingleRoom = (props) => {
   const { rooms } = useSelector(roomsState);
@@ -20,7 +22,6 @@ const SingleRoom = (props) => {
   });
 
 
-
   useEffect(() => {
     if (rooms.length < 1){
       history.push("/rooms")
@@ -28,18 +29,22 @@ const SingleRoom = (props) => {
   }, [rooms]);
 
 
+  const getRoom = (slug) => {
+    let tempRooms = state.rooms
+    const room = tempRooms.find((item) => item.fields.slug === slug);
+    // const room = tempRooms.find((item) => item.slug === slug);
+    if(room){
+      console.log('room :>> ', room);
+      // console.log('\n getRoom find Room:>> ', formatData(room));
+      console.log('room.length :>> ', room.length);
+      return room.fields;
+    }
+  };
+
   useEffect(() => {
     setState({ ...state, room: getRoom(state.slug) });
   }, []);
 
-  const getRoom = (slug) => {
-    let tempRooms = rooms
-    const room = tempRooms.find((item) => item.fields.slug === slug);
-    if(room){
-      console.log('SingleRoom room :>> ', room.fields);
-      return room.fields;
-    }
-  };
 
     const {
       name,
@@ -51,7 +56,7 @@ const SingleRoom = (props) => {
       breakfast,
       pets,
       images
-    } = state.room
+    } = state && state.room
 
   
   if (!images || !extras) {
@@ -64,6 +69,7 @@ const SingleRoom = (props) => {
       </div>
     );
   }
+
 
   return (
     <>

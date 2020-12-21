@@ -7,7 +7,7 @@ const Room = ({ room }) => {
   return (
     <article className="room">
       <div className="img-container">
-        <img src={images[0] || defaultImg} alt="single room" />
+        <img src={`${process.env.PUBLIC_URL}/images/${images[0] || defaultImg}`} alt="single room" />
         <div className="price-top">
           <h6>${price}</h6>
           <p>per night</p>

@@ -1,6 +1,6 @@
 import React from "react";
 import Title from "../components/Title";
-import { getUniqueTypes } from "../util/utils";
+import { getUniqueTypes } from "../util";
 
 
 const options = (arr) => {
