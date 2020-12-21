@@ -3,7 +3,7 @@ import Room  from "./Room"
 
 
 const RoomList = ({rooms}) => {
-    if (rooms.length === 0){
+    if (rooms.length < 1 ){
         return (
             <div className="empty-search">
                 <h3>No matches found.</h3>

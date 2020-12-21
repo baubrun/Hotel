@@ -14,6 +14,8 @@ const options = (arr) => {
 };
 
 const SearchRooms = (props) => {
+
+
   const {
     capacity,
     minPrice,

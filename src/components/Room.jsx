@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Room = ({ room }) => {
+  
   const { images, name, price, slug } = room;
   return (
     <article className="room">

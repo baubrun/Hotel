@@ -7,6 +7,7 @@ import RoomList from "./RoomList";
 import { formatData } from "../util";
 import { roomsState } from "../redux/roomSlice";
 
+
 const RoomContainer = () => {
   const { rooms } = useSelector(roomsState);
   const [state, setState] = useState({
@@ -22,6 +23,20 @@ const RoomContainer = () => {
     breakfast: false,
     pets: false,
   });
+
+
+  useEffect(() => {
+    if (rooms.length > 0)
+    selectRoom();
+  }, [
+    state.capacity,
+    state.type,
+    state.price,
+    state.breakfast,
+    state.pets,
+    state.minSize,
+    state.maxSize,
+  ]);
 
   useEffect(() => {
     const data = formatData(rooms);
@@ -45,18 +60,7 @@ const RoomContainer = () => {
     setState({ ...state, [evt.target.name]: value });
   };
 
-  // useEffect(() => {
-  //   selectRoom();
-  //   // console.log('***** :>> ', )
-  // }, [
-  //   state.capacity,
-  //   state.type,
-  //   state.price,
-  //   state.breakfast,
-  //   state.pets,
-  //   state.minSize,
-  //   state.maxSize,
-  // ]);
+
 
   const selectRoom = () => {
     let {
@@ -69,8 +73,7 @@ const RoomContainer = () => {
       breakfast,
       pets,
     } = state;
-    let sr = rooms;
-    // console.log("rooms :>> ", rooms);
+    let sr = [...rooms]
 
     capacity = parseInt(capacity);
     price = parseInt(price);
@@ -92,7 +95,8 @@ const RoomContainer = () => {
     if (pets) {
       sr = sr.filter((r) => r.pets === true);
     }
-    setState({ ...state, selectedRooms: sr });
+    setState({...state, selectedRooms: sr});
+
   };
 
   return (

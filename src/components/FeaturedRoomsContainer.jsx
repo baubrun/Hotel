@@ -12,7 +12,7 @@ const FeaturedRoomsContainer = () => {
   useEffect(() => {
     const data = formatData(rooms);
     getFeaturedRooms(data);
-  }, []);
+  }, [rooms]);
 
   const getFeaturedRooms = (rooms) => {
     const fr = rooms.filter((room) => room.featured === true);

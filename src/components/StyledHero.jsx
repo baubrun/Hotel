@@ -1,5 +1,4 @@
 import styled from "styled-components";
-// import defaultImg from "../images/default.jpeg";
 
 const StyledHero = styled.header`
   align-items: center;

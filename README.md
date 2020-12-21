@@ -1,7 +1,18 @@
-A hotel site where users can view room prices.
+#### A simple hotel app where users can view rooms.
 
-Technologies: React
+<br>    
 
-Demo: https://adoring-clarke-6c55be.netlify.app/rooms
+#### Technologies: Flask, MongoDb, Python React, Redux
 
-Enter "yarn start" to start the project.
+<br>    
+
+#### To run client : yarn start
+
+<br>    
+
+#### Server code:
+<br>    
+
+#### https://github.com/baubrun/api-hotel
+
+
