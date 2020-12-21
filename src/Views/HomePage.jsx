@@ -9,7 +9,7 @@ import FeaturedRoomsContainer from "../components/FeaturedRoomsContainer"
 const HomePage = () => {
   return (
     <>
-    <HeroImg>
+    <HeroImg hero="defaultHero">
       <Banner title="Luxury Rooms" subtitle="Deluxe Rooms starting at $299">
         <Link to="/rooms" className="btn-primary">
           View Rooms

@@ -12,7 +12,7 @@ import { formatData } from "../util";
 const SingleRoom = (props) => {
   const { rooms } = useSelector(roomsState);
   const history = useHistory();
-
+  const [imgLoaded, setImgLoaded] = useState(false)
   const [state, setState] = useState({
     defaultImage: `${process.env.PUBLIC_URL}/images/$room-1.jpeg`,
     slug: props.match.params.slug,
@@ -24,7 +24,7 @@ const SingleRoom = (props) => {
     if (rooms.length < 1) {
       history.push("/rooms");
     }
-  }, [rooms]);
+  }, [rooms, history]);
 
 
   const getRoom = (slug) => {
@@ -68,6 +68,7 @@ const SingleRoom = (props) => {
     <>
       <StyledHero
         hero="roomsHero"
+        imgLoaded={imgLoaded}
         img={`${process.env.PUBLIC_URL}/images/${images[0]}`}
       >
         <Banner title={`${name} room`}>
@@ -83,6 +84,8 @@ const SingleRoom = (props) => {
             return (
               <img
                 key={idx}
+                onLoad={() => setImgLoaded(true)}
+                style={{ display: `${imgLoaded ? "block": "none"}` }}
                 src={`${process.env.PUBLIC_URL}/images/${img}`}
                 alt={name}
               />

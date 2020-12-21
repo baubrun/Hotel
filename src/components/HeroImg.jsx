@@ -9,10 +9,6 @@ const HeroImg = ({children, hero}) => {
 }
 
 
-HeroImg.defaultProps = {
-    hero: "defaultHero"
-}
-
 export default HeroImg
 
 
