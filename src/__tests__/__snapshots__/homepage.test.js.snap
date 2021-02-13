@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Homepage renders correctly 1`] = `
+<Fragment>
+  <HeroImg
+    hero="defaultHero"
+  >
+    <Banner
+      subtitle="Deluxe Rooms starting at $299"
+      title="Luxury Rooms"
+    >
+      <Link
+        className="btn-primary"
+        to="/rooms"
+      >
+        View Rooms
+      </Link>
+    </Banner>
+  </HeroImg>
+  <Amenities />
+  <FeaturedRoomsContainer />
+</Fragment>
+`;

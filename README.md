@@ -2,7 +2,7 @@
 
 <br>    
 
-#### Technologies: Flask, MongoDb, Python React, Redux
+#### Technologies: Flask, MongoDb, Python, React, Redux
 
 <br>    
 
